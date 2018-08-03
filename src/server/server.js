@@ -1,6 +1,5 @@
+import Hapi from 'hapi';
 import { default as api} from './api';
-
-const Hapi = require('hapi');
 
 // Create the Hapi server
 const PORT = process.env.PORT || 8000;
@@ -10,18 +9,10 @@ const server = new Hapi.Server({ host: HOST, port: PORT });
 const init = async () => {
 
   await server.register([
-    {
-      plugin: require('h2o2')
-    },
-    {
-      plugin: require('inert')
-    },
-    {
-      plugin: require('vision')
-    },
-    {
-      plugin: require('blipp')
-    },
+    require('h2o2'),
+    require('inert'),
+    require('vision'),
+    require('blipp'),
     {
       // Our API routes
       plugin: api

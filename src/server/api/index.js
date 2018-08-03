@@ -1,4 +1,5 @@
 import { notFound } from './controllers/home';
+import { get, search } from './controllers/product';
 
 const api = {
   name: 'api',
@@ -8,6 +9,18 @@ const api = {
       method: 'GET',
       path: '/api/{path*}',
       config: notFound
+    });
+
+    server.route({
+      method: 'GET',
+      path: '/api/product/{id}',
+      config: get
+    });
+
+    server.route({
+      method: 'GET',
+      path: '/api/product/search',
+      config: search
     });
   }
 };

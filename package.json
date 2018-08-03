@@ -1,7 +1,7 @@
 {
   "name": "walmart-items",
   "version": "1.0.0",
-  "description": "Mullet Stack: Facebook in the front. Walmart in the back. (React.js/Hapi)",
+  "description": "Application for searching products at Walmart",
   "main": "walmart.js",
   "watch": {
     "test": "{src,test}/*.js"
@@ -10,10 +10,13 @@
     "webpack": "webpack",
     "test": "jest --verbose && lab -v -l",
     "lint": "eslint . --ext .js",
-    "start": "nodemon --watch src babelify.js src/server/server.js",
+    "watch": "webpack --watch",
+    "server": "nodemon --watch src babelify.js src/server/server.js",
+    "start": "npm-run-all --parallel watch server",
     "format": "prettier --single-quote --write *.js src/components/*.js test/*.js"
   },
   "dependencies": {
+    "@material-ui/core": "^1.4.2",
     "babel": "^6.23.0",
     "babel-core": "^6.4.0",
     "babel-jest": "^21.0.0",
@@ -27,27 +30,35 @@
     "bootstrap": "^3.3.5",
     "h2o2": "^7.0.0",
     "hapi": "^17.0.0",
+    "hapi-webpack-plugin": "^3.0.0",
     "inert": "^5.1.0",
     "jest": "^21.0.0",
     "npm-watch": "^0.2.0",
+    "querystring": "^0.2.0",
     "react": "^16.4.2",
     "react-dom": "^16.4.2",
     "react-proptypes": "^1.0.0",
     "react-scripts": "^1.0.0",
+    "request": "^2.87.0",
+    "request-promise-native": "^1.0.5",
     "vision": "^5.3.3",
     "webpack": "^3.0.0"
   },
   "devDependencies": {
     "code": "^5.0.0",
-    "enzyme": "^2.7.1",
+    "enzyme": "^3.3.0",
     "eslint": "^4.19.1",
     "eslint-config-eta": "^1.0.0",
     "eslint-plugin-babel": "^4.1.1",
     "eslint-plugin-react": "^7.10.0",
     "jest-cli": "^21.0.0",
     "lab": "^14.0.0",
+    "nodemon": "^1.18.3",
+    "npm-run-all": "^4.1.3",
     "prettier": "^1.0.1",
     "react-addons-test-utils": "^15.6.2",
-    "react-test-renderer": "^15.4.2"
+    "react-test-renderer": "^16.4.2",
+    "webpack-cli": "^3.1.0",
+    "webpack-node-externals": "^1.7.2"
   }
 }

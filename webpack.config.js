@@ -2,13 +2,13 @@ const path = require('path');
 
 module.exports = {
   entry: {
-    app: './src/components/Main.js',
-    server: './src/server.js'
+    app: './src/client/App.js'
   },
   output: {
     filename: '[name].js',
-    path: __dirname + '/dist'
+    path: path.join(__dirname, 'public/js'),
   },
+  devtool: 'inline-source-map',
   module: {
     loaders: [
       {
@@ -19,6 +19,9 @@ module.exports = {
           presets: ['es2015', 'react']
         }
       }
-    ]
+    ],
+  },
+  watchOptions: {
+    ignored: /node_modules/
   }
 };
