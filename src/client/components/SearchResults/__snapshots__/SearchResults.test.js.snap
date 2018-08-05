@@ -2,6 +2,10 @@
 
 exports[`Product component should render properly 1`] = `
 <div
-  id="product-list"
-/>
+  id="search-results"
+>
+  <div
+    id="product-list"
+  />
+</div>
 `;

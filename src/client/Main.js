@@ -1,5 +1,5 @@
 import React from 'react';
-import {arrayOf, func, number, shape, string} from 'react-proptypes';
+import {arrayOf, func, number, shape, string, bool} from 'react-proptypes';
 import { connect } from 'react-redux';
 import CssBaseline from '@material-ui/core/CssBaseline';
 import Grid from '@material-ui/core/Grid';
@@ -17,21 +17,24 @@ const propTypes = {
     name: string,
     /** The medium image src of the product */
     mediumImage: string
-  }))
+  })),
+  /** Indicates if we are fetching products */
+  loading: bool
 };
 
 const defaultProps = {
   searchProducts: () => {},
-  products: []
+  products: [],
+  loading: false
 };
 
-const Main = ({products, searchProducts}) => (
+const Main = ({products, searchProducts, loading}) => (
   <React.Fragment>
     <CssBaseline />
     <Grid container justify="center" spacing={24}>
       <Grid item md={8} xs={11}>
         <SearchBar searchProducts={searchProducts}/>
-        <SearchResults products={products}/>
+        <SearchResults products={products} loading={loading}/>
       </Grid>
     </Grid>
   </React.Fragment>
@@ -39,7 +42,8 @@ const Main = ({products, searchProducts}) => (
 
 const mapStateToProps = state => {
   return {
-    products: state.products
+    products: state.products.products,
+    loading: state.products.loading
   };
 };
 

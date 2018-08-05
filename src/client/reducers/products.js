@@ -1,7 +1,15 @@
-const products = (state = [], action) => {
+const products = (state = {products: [], loading: false}, action) => {
   switch (action.type) {
     case 'SET_PRODUCTS':
-      return [...action.products];
+      return {
+        products: [...action.products],
+        loading: false
+      };
+    case 'FETCHING_PRODUCTS':
+      return {
+        ...state,
+        loading: true
+      };
     case 'CLEAR_PRODUCTS':
       return [];
     default:
