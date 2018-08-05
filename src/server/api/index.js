@@ -5,6 +5,7 @@ const api = {
   name: 'api',
   version: '1.0.0',
   register: async function (server, options) {
+    // 404 route
     server.route({
       method: 'GET',
       path: '/api/{path*}',

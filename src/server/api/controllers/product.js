@@ -4,6 +4,15 @@ import { productModel, productsModel } from '../models';
 import { mapProducts, reduceProduct } from '../utils';
 
 export const get = {
+  description: 'Get meta data of a product',
+  notes: 'Returns the meta data of a product using the product id',
+  tags: ['api', 'product'],
+  validate: {
+    params: {
+      id: Joi.number().required().description('the product id')
+    }
+  },
+  response: { schema: productModel },
   handler: async (req, h) => {
     const id = req.params.id;
 
@@ -21,9 +30,8 @@ export const get = {
       });
 
       if (response.statusCode === 200) {
-        console.log(response.body.item);
-        const product = reduceProduct(response.body);
-        return  product;
+        // Reduce the properties of the product
+        return reduceProduct(response.body);
       }
       else {
         return h.response({
@@ -37,19 +45,19 @@ export const get = {
         message: 'Unable to process your request'
       }).code(500);
     }
-  },
-  description: 'Get meta data of a product',
-  notes: 'Returns the meta data of a product using the product id',
-  tags: ['api', 'product'],
-  validate: {
-    params: {
-      id: Joi.number().required().description('the product id')
-    }
-  },
-  response: { schema: productModel }
+  }
 };
 
 export const search = {
+  description: 'Search products by query',
+  notes: 'Returns a list of products returned by the Walmart API using the passed in query',
+  tags: ['api', 'product'],
+  validate: {
+    query: {
+      query: Joi.string().required().description('the query to search with')
+    }
+  },
+  response: { schema: productsModel },
   handler: async (req, h) => {
     if (!req.query.query) {
       // No search query
@@ -74,8 +82,8 @@ export const search = {
       });
 
       if (response.statusCode === 200) {
+        // Reduce the properties of each product in the array
         const products = mapProducts(response.body.items);
-        console.log(products);
         return  { products };
       }
       else {
@@ -91,14 +99,5 @@ export const search = {
         message: 'Unable to process your request'
       }).code(500);
     }
-  },
-  description: 'Search products by query',
-  notes: 'Returns a list of products returned by the Walmart API using the passed in query',
-  tags: ['api', 'product'],
-  validate: {
-    query: {
-      query: Joi.string().required().description('the query to search with')
-    }
-  },
-  response: { schema: productsModel }
+  }
 };

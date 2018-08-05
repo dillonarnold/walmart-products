@@ -1,5 +1,8 @@
 import { reduceProduct } from './index';
 
+/**
+ *  Reduces the properties of each product object in an array of products
+ */
 const mapProducts = products => {
   if (!Array.isArray(products)) {
     return [];

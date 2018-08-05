@@ -1,3 +1,6 @@
+/**
+ *  Reduces the properties of a product object
+ */
 const reduceProduct = product => {
   return {
     itemId: product.itemId,
