@@ -8,7 +8,7 @@
   },
   "scripts": {
     "webpack": "webpack",
-    "test": "lab -T node_modules/lab-babel -S -l -v",
+    "test": "jest --verbose && lab -T node_modules/lab-babel -S -l -v",
     "lint": "eslint . --ext .js",
     "watch": "webpack --watch",
     "server": "nodemon --watch src babelify.js src/server/server.js",
