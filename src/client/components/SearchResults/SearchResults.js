@@ -1,7 +1,7 @@
 import React from 'react';
 import { shape, string, number, arrayOf } from 'react-proptypes';
 import { connect } from 'react-redux';
-import Product from './Product';
+import Product from '../Product/Product';
 
 const propTypes = {
   products: arrayOf(shape({

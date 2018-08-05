@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { func } from 'react-proptypes';
 import TextField from '@material-ui/core/TextField';
 import { connect } from 'react-redux';
-import { searchProducts } from '../actions';
+import { searchProducts } from '../../actions/index';
 
 class SearchBar extends Component {
   state = {
