@@ -1,15 +1,20 @@
 import React, { Component } from 'react';
 import { func } from 'react-proptypes';
 import TextField from '@material-ui/core/TextField';
-import { connect } from 'react-redux';
-import { searchProducts } from '../../actions/index';
 
+/**
+ * A search bar that takes a keyword and makes a call to a function upon hitting enter.
+ *
+ * @version 1.0.0
+ * @author Dillon Arnold
+ */
 class SearchBar extends Component {
   state = {
     searchString: ''
   };
 
   static propTypes = {
+    /** Function called upon hitting enter in the text field that takes a string parameter*/
     searchProducts: func
   };
 
@@ -50,10 +55,4 @@ class SearchBar extends Component {
   }
 }
 
-const mapDispatchToProps = dispatch => {
-  return {
-    searchProducts: query => dispatch(searchProducts(query))
-  };
-};
-
-export default connect(null, mapDispatchToProps)(SearchBar);
+export default SearchBar;
