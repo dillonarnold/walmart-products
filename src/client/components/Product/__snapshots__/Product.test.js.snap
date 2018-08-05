@@ -1,0 +1,27 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Product component should render properly 1`] = `
+<WithStyles(Card)
+  id="card-123456"
+>
+  <WithStyles(CardContent)>
+    <WithStyles(Typography)
+      color="primary"
+      id="cardName-123456"
+    >
+      iPod
+    </WithStyles(Typography)>
+    <WithStyles(Typography)
+      color="textSecondary"
+      id="cardId-123456"
+    >
+      123456
+    </WithStyles(Typography)>
+    <img
+      alt="iPod"
+      id="cardImage-123456"
+      src="imageSrc"
+    />
+  </WithStyles(CardContent)>
+</WithStyles(Card)>
+`;

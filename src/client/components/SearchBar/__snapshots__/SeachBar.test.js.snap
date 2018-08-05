@@ -1,0 +1,15 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Product component should render properly 1`] = `
+<TextField
+  fullWidth={true}
+  id="searchField"
+  label="Search"
+  margin="normal"
+  onChange={[Function]}
+  onKeyDown={[Function]}
+  required={false}
+  select={false}
+  value=""
+/>
+`;

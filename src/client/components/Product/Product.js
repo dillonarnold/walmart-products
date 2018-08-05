@@ -25,7 +25,7 @@ const propTypes = {
 const Product = ({product}) => (
   <Card id={`card-${product.itemId}`}>
     <CardContent>
-      <Typography id={`cardName-${product.itemId}`} color="h2">
+      <Typography id={`cardName-${product.itemId}`} color="primary">
         {product.name}
       </Typography>
       <Typography id={`cardId-${product.itemId}`} color="textSecondary">
