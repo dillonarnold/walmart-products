@@ -9,6 +9,7 @@
   "scripts": {
     "webpack": "webpack",
     "test": "jest --verbose && lab -T node_modules/lab-babel -S -l -v",
+    "styleguide": "npx styleguidist server",
     "lint": "eslint . --ext .js",
     "watch": "webpack --watch",
     "server": "nodemon --watch src babelify.js src/server/server.js",
