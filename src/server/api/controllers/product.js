@@ -1,6 +1,7 @@
 import request from 'request-promise-native';
 import Joi from 'joi';
-
+import { productModel, productsModel } from '../models';
+import { mapProducts } from '../utils';
 
 export const get = {
   handler: async (req, h) => {
@@ -8,22 +9,43 @@ export const get = {
 
     const qs = {
       'format': 'json',
-      'apiKey': 'kjybrqfdgp3u4yv2qzcnjndj'
+      'apiKey': 'kjybrqfdgp3u4yv2qzcnjndj' // TODO: move this to a central configuration
     };
 
     try {
-      return await request.get({url: `http://api.walmartlabs.com/v1/items/${id}`, qs, json: true});
+      const response = await request.get({
+        url: `http://api.walmartlabs.com/v1/items/${id}`,
+        qs,
+        resolveWithFullResponse: true,
+        json: true
+      });
+
+      if (response.statusCode === 200) {
+        const product = mapProducts(response.body.items);
+        return  { product};
+      }
+      else {
+        return h.response({
+          // TODO: better error messages
+          message: 'Unable to process your request'
+        }).code(500);
+      }
     } catch (e) {
+      return h.response({
+        // TODO: better error messages
+        message: 'Unable to process your request'
+      }).code(500);
     }
   },
   description: 'Get meta data of a product',
   notes: 'Returns the meta data of a product using the product id',
-  tags: ['api', 'product'], // ADD THIS TAG
+  tags: ['api', 'product'],
   validate: {
     params: {
       id: Joi.number().required().description('the product id')
     }
-  }
+  },
+  response: { schema: productModel }
 };
 
 export const search = {
@@ -38,22 +60,43 @@ export const search = {
 
     const qs = {
       'format': 'json',
-      'apiKey': 'kjybrqfdgp3u4yv2qzcnjndj',
+      'apiKey': 'kjybrqfdgp3u4yv2qzcnjndj', // TODO: move this to a central configuration
       'query': query
     };
 
     try {
-      const response = await request.get({url: 'http://api.walmartlabs.com/v1/search', qs, json: true});
-      return  {products: response.items };
-    } catch (e) {
+      const response = await request.get({
+        url: 'http://api.walmartlabs.com/v1/search',
+        qs,
+        resolveWithFullResponse: true,
+        json: true
+      });
+
+      if (response.statusCode === 200) {
+        const products = mapProducts(response.body.items);
+        return  { products};
+      }
+      else {
+        return h.response({
+          // TODO: better error messages
+          message: 'Unable to process your request'
+        }).code(500);
+      }
+    }
+    catch (e) {
+      return h.response({
+        // TODO: better error messages
+        message: 'Unable to process your request'
+      }).code(500);
     }
   },
   description: 'Search products by query',
   notes: 'Returns a list of products returned by the Walmart API using the passed in query',
-  tags: ['api', 'product'], // ADD THIS TAG
+  tags: ['api', 'product'],
   validate: {
     query: {
       query: Joi.string().required().description('the query to search with')
     }
-  }
+  },
+  response: { schema: productsModel }
 };
