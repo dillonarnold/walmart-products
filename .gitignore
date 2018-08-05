@@ -1,8 +1,6 @@
 node_modules
-public/css/bootstrap*.min.css
-public/js/app.built.js
-public/js/jquery.min.*
-public/js/bootstrap.min.js
+public/css
+public/js
 npm-debug.log
 .idea
 yarn-error.log
