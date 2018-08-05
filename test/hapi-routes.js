@@ -1,43 +1,42 @@
 'use strict';
-
+require('babel-polyfill');
 const Code = require('code'); // assertion library for Lab
 const Lab = require('lab');
-const lab = (exports.lab = Lab.script());
+const lab = exports.lab = Lab.script();
 const server = require('../src/server/server');
 
 lab.experiment('General Endpoint Tests', () => {
-  lab.test('GET / (default test)', done => {
+  lab.test('GET / (default test)', async () => {
     const options = {
-      method: 'GET',
-      url: '/'
+      url: '/',
+      method: 'GET'
     };
-    server.inject(options, function(response) {
-      Code.expect(response.statusCode).to.equal(200);
-      done();
-    });
+    await server.inject(options);
   });
 
-  lab.test('GET /images/mullet_600.png', done => {
+  lab.test('GET 404', async () => {
     const options = {
-      method: 'GET',
-      url: '/images/mullet_600.png'
+      url: '/api/abc',
+      method: 'GET'
     };
-    server.inject(options, response => {
-      Code.expect(response.statusCode).to.equal(200);
-      done();
-    });
+    const response = await server.inject(options);
+    Code.expect(response.statusCode).to.equal(404);
   });
 
-  lab.test('GET /data', done => {
+  lab.test('GET product', async () => {
     const options = {
-      method: 'GET',
-      url: '/data'
+      url: '/api/product/14225185',
+      method: 'GET'
     };
-    server.inject(options, response => {
-      Code.expect(response.statusCode).to.equal(200);
-      Code.expect(response.result).to.be.an.object();
-      Code.expect(response.result.message).to.equal('Welcome to Mullet!');
-      done();
-    });
+    await server.inject(options);
+  });
+
+  lab.test('GET product that does not exist', async () => {
+    const options = {
+      url: '/api/product/14',
+      method: 'GET'
+    };
+    const response = await server.inject(options);
+    Code.expect(response.statusCode).to.equal(500);
   });
 });

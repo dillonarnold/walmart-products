@@ -27,7 +27,7 @@ export const get = {
       }
       else {
         return h.response({
-          // TODO: better error messages
+          // TODO: better error messages like 422 for productId that couldn't be found
           message: 'Unable to process your request'
         }).code(500);
       }
