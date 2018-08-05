@@ -32,9 +32,5 @@ if (process.argv.length > 2) {
   if (fs.existsSync(resolvedFile)) {
     require(resolvedFile);
   }
-} else {
-  console.log("Babelize is only helpful when provided with a file name");
-  console.log("Usage: nodejs babelify.js <path to file>");
-  console.log("Example: nodejs babelify.js ./dev.server.js");
 }
 /* eslint-enable */

@@ -33,7 +33,8 @@ export const search = {
     };
 
     try {
-      return await request.get({url: 'http://api.walmartlabs.com/v1/search', qs, json: true});
+      const response = await request.get({url: 'http://api.walmartlabs.com/v1/search', qs, json: true});
+      return  {products: response.items };
     } catch (e) {
     }
   }

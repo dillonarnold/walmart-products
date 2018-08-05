@@ -1,6 +1,7 @@
 const path = require('path');
 
 module.exports = {
+  mode: 'development',
   entry: {
     app: './src/client/App.js'
   },
@@ -8,16 +9,13 @@ module.exports = {
     filename: '[name].js',
     path: path.join(__dirname, 'public/js'),
   },
-  devtool: 'inline-source-map',
+  devtool: 'eval-source-map',
   module: {
-    loaders: [
+    rules: [
       {
         test: /.jsx?$/,
         loader: 'babel-loader',
-        exclude: /node_modules/,
-        query: {
-          presets: ['es2015', 'react']
-        }
+        exclude: /node_modules/
       }
     ],
   },

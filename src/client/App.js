@@ -1,24 +1,26 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import CssBaseline from '@material-ui/core/CssBaseline';
-import Grid from '@material-ui/core/Grid';
+import thunk from 'redux-thunk';
+import { Provider } from 'react-redux';
+import { createStore, applyMiddleware, compose } from 'redux';
+import rootReducer from './reducers';
+import Main from './Main';
 
-const App = () => {
-  return (
-    <React.Fragment>
-      <CssBaseline />
-      <Grid container spacing={24}>
-        <Grid item md={12}>
-        </Grid>
-      </Grid>
-    </React.Fragment>
-  );
-};
+/* eslint-disable no-underscore-dangle */
+const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
+/* eslint-enable */
 
-ReactDOM.render(
-  <App
-    title="Welcome to the Mullet Stack."
-    subtitle="Facebook in a asdf. adfawerewrwerf in the back."
-  />,
-  document.getElementById('root')
+const store = createStore(
+  rootReducer,
+  composeEnhancers(applyMiddleware(thunk))
 );
+
+const App = () =>  (
+  <Provider store={store}>
+    <React.StrictMode>
+      <Main/>
+    </React.StrictMode>
+  </Provider>
+);
+
+ReactDOM.render(<App/>, document.getElementById('root'));
