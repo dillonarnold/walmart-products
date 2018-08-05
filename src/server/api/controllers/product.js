@@ -1,7 +1,7 @@
 import request from 'request-promise-native';
 import Joi from 'joi';
 import { productModel, productsModel } from '../models';
-import { mapProducts } from '../utils';
+import { mapProducts, reduceProduct } from '../utils';
 
 export const get = {
   handler: async (req, h) => {
@@ -21,8 +21,9 @@ export const get = {
       });
 
       if (response.statusCode === 200) {
-        const product = mapProducts(response.body.items);
-        return  { product};
+        console.log(response.body.item);
+        const product = reduceProduct(response.body);
+        return  product;
       }
       else {
         return h.response({
@@ -74,7 +75,8 @@ export const search = {
 
       if (response.statusCode === 200) {
         const products = mapProducts(response.body.items);
-        return  { products};
+        console.log(products);
+        return  { products };
       }
       else {
         return h.response({
