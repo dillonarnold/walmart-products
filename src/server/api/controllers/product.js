@@ -33,16 +33,22 @@ export const get = {
         // Reduce the properties of the product
         return reduceProduct(response.body);
       }
+      else if (response.statusCode === 400) {
+        return h.response(response.body).code(400);
+      }
       else {
         return h.response({
-          // TODO: better error messages like 422 for productId that couldn't be found
-          message: 'Unable to process your request'
+          errors: [{
+            message: 'Unable to process your request'
+          }]
         }).code(500);
       }
     } catch (e) {
       return h.response({
         // TODO: better error messages
-        message: 'Unable to process your request'
+        errors: [{
+          message: 'Unable to process your request'
+        }]
       }).code(500);
     }
   }
@@ -86,17 +92,23 @@ export const search = {
         const products = mapProducts(response.body.items);
         return  { products };
       }
+      else if (response.statusCode === 400) {
+        return h.response(response.body).code(400);
+      }
       else {
         return h.response({
-          // TODO: better error messages
-          message: 'Unable to process your request'
+          errors: [{
+            message: 'Unable to process your request'
+          }]
         }).code(500);
       }
     }
     catch (e) {
       return h.response({
         // TODO: better error messages
-        message: 'Unable to process your request'
+        errors: [{
+          message: 'Unable to process your request'
+        }]
       }).code(500);
     }
   }
