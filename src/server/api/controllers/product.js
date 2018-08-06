@@ -34,6 +34,7 @@ export const get = {
         return reduceProduct(response.body);
       }
       else if (response.statusCode === 400) {
+        // Pass error messages to client
         return h.response(response.body).code(400);
       }
       else {
@@ -93,6 +94,7 @@ export const search = {
         return  { products };
       }
       else if (response.statusCode === 400) {
+        // Pass error messages to client
         return h.response(response.body).code(400);
       }
       else {
