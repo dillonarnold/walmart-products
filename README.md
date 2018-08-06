@@ -1,4 +1,12 @@
 # Walmart Products
+
+I implemented a front-end and two endpoints for retrieving meta data using an itemId and searching for products using a query.
+The front-end currently only uses the search. 
+
+The assignment stated to implement an endpoint for retrieving items by keyword using the itemId endpoint.
+This would work if I retrieved meta data each time for each itemId provided in the list and matched the meta data to the query keyword.
+I did not implement this, but I can if requested.
+
 The Hapi server really needs a separate webpack config from the front-end.
 There is currently no hot-reloading due to the files not being served from a webpack dev server.
 I did not want to spend too much time trying to configure all of this. 
