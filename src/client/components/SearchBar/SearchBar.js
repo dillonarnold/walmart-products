@@ -15,17 +15,22 @@ class SearchBar extends Component {
 
   static propTypes = {
     /** Function called upon hitting enter in the text field that takes a string parameter*/
-    searchProducts: func
+    searchProducts: func,
+    /** Clears the search results */
+    clearSearch: func
   };
 
   static defaultProps = {
-    searchProducts: () => {}
+    searchProducts: () => {},
+    clearSearch: () => {}
   };
 
   // Used for onEnter on the search text field
   handleTextFieldKeyDown = event => {
     switch (event.key) {
       case 'Enter':
+        // Clear current results
+        this.props.clearSearch();
         // Make API call for search query
         this.props.searchProducts(this.state.searchString);
         break;
