@@ -27,7 +27,11 @@ const propTypes = {
   /** Used for pagination, gets the next page of products */
   getNextPage: func,
   /** Used for pagination, gets the previous page of products */
-  getPreviousPage: func
+  getPreviousPage: func,
+  /** The number of products per page */
+  numProducts: number,
+  /** Function for clearing product search results */
+  clearSearch: func
 };
 
 const defaultProps = {
@@ -38,21 +42,25 @@ const defaultProps = {
   totalResults: 0
 };
 
-const Main = ({products, searchProducts, loading, totalResults, currentPage, getNextPage, getPreviousPage}) => {
+const Main = ({products, searchProducts, loading, totalResults, currentPage, getNextPage, getPreviousPage, numProducts, clearSearch}) => {
   return (
     <React.Fragment>
       <CssBaseline />
       <Grid container justify="center" spacing={24}>
         <Grid item md={8} xs={11}>
-          <SearchBar searchProducts={searchProducts}/>
+          <SearchBar
+            searchProducts={searchProducts}
+            currentPage={currentPage}
+            totalResults={totalResults}
+            totalPages={Math.ceil(totalResults / numProducts)}
+            getNextPage={getNextPage}
+            getPreviousPage={getPreviousPage}
+            clearSearch={clearSearch}
+            loading={loading}
+          />
           <SearchResults
             products={products}
             loading={loading}
-            currentPage={currentPage}
-            totalResults={totalResults}
-            totalPages={Math.ceil(totalResults / products.length)}
-            getNextPage={getNextPage}
-            getPreviousPage={getPreviousPage}
           />
         </Grid>
       </Grid>
@@ -65,15 +73,16 @@ const mapStateToProps = state => {
     products: state.products.products,
     totalResults: state.products.totalResults,
     currentPage: state.products.currentPage,
-    loading: state.products.loading
+    loading: state.products.loading,
+    numProducts: state.products.numProducts
   };
 };
 
 const mapDispatchToProps = dispatch => {
   return {
     searchProducts: query => dispatch(searchProducts(query)),
-    getNextPage: () => dispatch(getNextPage()),
-    getPreviousPage: () => dispatch(getPreviousPage()),
+    getNextPage: query => dispatch(getNextPage(query)),
+    getPreviousPage: query => dispatch(getPreviousPage(query)),
     clearSearch: () => dispatch(clearSearch())
   };
 };

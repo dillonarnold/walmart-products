@@ -1,15 +1,69 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`Product component should render properly 1`] = `
-<TextField
-  fullWidth={true}
-  id="searchField"
-  label="Search"
-  margin="normal"
-  onChange={[Function]}
-  onKeyDown={[Function]}
-  required={false}
-  select={false}
-  value=""
-/>
+<div>
+  <TextField
+    fullWidth={true}
+    id="searchField"
+    label="Search"
+    margin="normal"
+    onChange={[Function]}
+    onKeyDown={[Function]}
+    required={false}
+    select={false}
+    value=""
+  />
+  <WithStyles(Grid)
+    container={true}
+    justify="center"
+    spacing={24}
+  >
+    <WithStyles(Grid)
+      item={true}
+      md={12}
+    >
+      Total Search Results: 
+      23
+    </WithStyles(Grid)>
+    <WithStyles(Grid)
+      item={true}
+      md={2}
+    >
+      <WithStyles(IconButton)
+        color="primary"
+        disabled={true}
+        onClick={[Function]}
+        variant="contained"
+      >
+        <WithStyles(Icon)>
+          arrow_back
+        </WithStyles(Icon)>
+      </WithStyles(IconButton)>
+    </WithStyles(Grid)>
+    <WithStyles(Grid)
+      item={true}
+      md={2}
+    >
+      1
+       of 
+      3
+       pages
+    </WithStyles(Grid)>
+    <WithStyles(Grid)
+      item={true}
+      md={2}
+    >
+      <WithStyles(IconButton)
+        color="primary"
+        disabled={false}
+        onClick={[Function]}
+        variant="contained"
+      >
+        <WithStyles(Icon)>
+          arrow_forward
+        </WithStyles(Icon)>
+      </WithStyles(IconButton)>
+    </WithStyles(Grid)>
+  </WithStyles(Grid)>
+</div>
 `;

@@ -9,12 +9,19 @@ const initialState = {
 const products = (state = initialState, action) => {
   switch (action.type) {
     case 'SET_PRODUCTS':
-      return {
-        products: [...action.products],
-        totalResults: action.totalResults,
-        numProducts: action.numProducts,
+      return Object.assign({}, state, {
+        ...state,
+        products: [...action.products.products],
+        totalResults: action.products.totalResults,
+        numProducts: action.products.numProducts,
         loading: false
-      };
+      });
+    case 'SET_PAGINATED_PRODUCTS':
+      return  Object.assign({}, state, {
+        ...state,
+        products: [...action.products],
+        loading: false
+      });
     case 'INCREASE_PAGE':
       return Object.assign({}, state, {
         ...state,
