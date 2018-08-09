@@ -80,7 +80,8 @@ export const search = {
       'format': 'json',
       'apiKey': 'kjybrqfdgp3u4yv2qzcnjndj', // TODO: move this to a central configuration
       'query': query,
-      'start': start
+      'start': start,
+      'numItems': 10 // Walmart API does not always seem to return only 10 results
     };
 
     try {
@@ -94,7 +95,7 @@ export const search = {
       if (response.statusCode === 200) {
         // Reduce the properties of each product in the array
         const products = mapProducts(response.body.items);
-        return  { numProducts: response.body.numItems, products };
+        return  { totalResults: response.body.totalResults, products };
       }
       else if (response.statusCode === 400) {
         // Pass error messages to client
