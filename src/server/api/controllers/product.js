@@ -61,7 +61,8 @@ export const search = {
   tags: ['api', 'product'],
   validate: {
     query: {
-      query: Joi.string().required().description('the query to search with')
+      query: Joi.string().required().description('the query to search with'),
+      start: Joi.number().default(1).description('product number to start with')
     }
   },
   response: { schema: productsModel },
@@ -71,13 +72,15 @@ export const search = {
       return { message: 'No query given' };
     }
 
-    // The request has a query parameter named query to correspond to the Walmart API
+    // The request has query parameters named query and start to correspond to the Walmart API
     const query = req.query.query;
+    const start = req.query.start;
 
     const qs = {
       'format': 'json',
       'apiKey': 'kjybrqfdgp3u4yv2qzcnjndj', // TODO: move this to a central configuration
-      'query': query
+      'query': query,
+      'start': start
     };
 
     try {
@@ -91,7 +94,7 @@ export const search = {
       if (response.statusCode === 200) {
         // Reduce the properties of each product in the array
         const products = mapProducts(response.body.items);
-        return  { products };
+        return  { numProducts: response.body.numItems, products };
       }
       else if (response.statusCode === 400) {
         // Pass error messages to client

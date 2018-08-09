@@ -7,5 +7,6 @@ export const productModel = Joi.object({
 });
 
 export const productsModel = Joi.object({
+  numProducts: Joi.number(),
   products: Joi.array().items(productModel)
 });
