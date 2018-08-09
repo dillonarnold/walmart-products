@@ -95,7 +95,11 @@ export const search = {
       if (response.statusCode === 200) {
         // Reduce the properties of each product in the array
         const products = mapProducts(response.body.items);
-        return  { totalResults: response.body.totalResults, products };
+        return  {
+          totalResults: response.body.totalResults,
+          numProducts: response.body.numItems,
+          products
+        };
       }
       else if (response.statusCode === 400) {
         // Pass error messages to client
