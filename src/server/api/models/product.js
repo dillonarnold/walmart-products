@@ -3,7 +3,8 @@ import Joi from 'joi';
 export const productModel = Joi.object({
   itemId: Joi.number(),
   name: Joi.string(),
-  mediumImage: Joi.string()
+  mediumImage: Joi.string(),
+  imageEntities: Joi.array()
 });
 
 export const productsModel = Joi.object({
